@@ -58,7 +58,25 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+  // this function will play the sounds
+  function playSound(e) {
+    const audio = document.querySelector(`audio[data-key='${e.keyCode}']`);
+    const key = document.querySelector(`.key[data-key='${e.keyCode}']`);
+    if (!audio) return; // stop the function from running all together
+    key.classList.add('playing'); // add playing class to the current key
+    audio.currentTime = 0; // rewind to the start 
+    audio.play(); // play the audio associated with key stroke
+  }
 
+  function removeTransisiton(e) {
+    // remove the transistion 
+    if (e.propertyName !== 'transform') return; // stop the function the event property is anything but transform
+    this.classList.remove('playing'); // remove the class "playing" from the the current key.
+  }
+
+  const keys = [...document.querySelectorAll('.key')];
+  keys.forEach(key => key.addEventListener('transitionend', removeTransisiton));
+  window.addEventListener('keydown', playSound);
 </script>
 
 
