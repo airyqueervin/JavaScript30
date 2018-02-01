@@ -78,6 +78,10 @@
       right: 148px;
     }
 
+    .notransistion {
+      transition: none !important;
+    }
+
   </style>
 
   <script>
@@ -94,6 +98,15 @@
       const minsDegree = ((mins / 60) * 360) + 90;
       const hoursDegree = ((hours / 12) * 360) + 90;
 
+      if (secondsDegree === 90) {
+        secondHand.classList.add('notransistion')
+        hourHand.classList.add('notransistion')
+        minsHand.classList.add('notransistion')
+      } else {
+        secondHand.classList.remove('notransistion')
+        hourHand.classList.remove('notransistion')
+        minsHand.classList.remove('notransistion')
+      } 
       secondHand.style.transform = `rotate(${secondsDegree}deg)`;
       minsHand.style.transform = `rotate(${minsDegree}deg)`;
       hourHand.style.transform = `rotate(${hoursDegree}deg)`;
